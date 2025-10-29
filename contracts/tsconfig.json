@@ -1,0 +1,35 @@
+{
+  "compilerOptions": {
+    "lib": [
+      "es2023"
+    ],
+    "module": "commonjs",
+    "target": "es2022",
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "moduleResolution": "node10",
+    "resolveJsonModule": true,
+    "isolatedModules": false,
+    "outDir": "dist",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./typechain-types"
+    ],
+    // "ignoreDeprecations": "6.0",
+  },
+  "files": [
+    "./hardhat.config.ts"
+  ],
+  "include": [
+    "./test/**/*.ts",
+    "./scripts/**/*.ts",
+    "./typechain-types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "artifacts",
+    "cache",
+    "dist"
+  ]
+}
