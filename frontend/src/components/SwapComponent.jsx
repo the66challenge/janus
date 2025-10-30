@@ -75,7 +75,8 @@ export function SwapComponent() {
     try {
       const amount = ethers.parseEther(ethAmount);
       return amount > 0 && amount <= ethBalance.value;
-    } catch {
+    } catch (err) {
+      console.warn('Invalid amount format:', err);
       return false;
     }
   };
@@ -163,7 +164,7 @@ export function SwapComponent() {
               placeholder="0.0"
               value={ethAmount}
               onChange={(e) => setEthAmount(e.target.value)}
-              className={`input flex-1 rounded-r-none ${
+              className={`input flex-1 rounded-r-none text-white font-mono ${
                 ethAmount && !isValidAmount() ? 'border-red-500 bg-red-900/20' : ''
               }`}
               step="0.001"
@@ -191,7 +192,7 @@ export function SwapComponent() {
               type="text"
               value={parseFloat(calculateOutput()).toFixed(6)}
               readOnly
-              className="input flex-1 rounded-r-none bg-gray-800 text-green-400 font-mono"
+              className="input flex-1 rounded-r-none bg-f1-black text-green-400 font-mono border-green-400/30"
             />
             <div className="px-3 py-2 bg-gray-700 border border-l-0 border-gray-600 rounded-r text-sm font-semibold">
               MCLAREN
@@ -213,7 +214,7 @@ export function SwapComponent() {
             placeholder="0.0"
             value={minAmountOut}
             onChange={(e) => setMinAmountOut(e.target.value)}
-            className="input w-full"
+            className="input w-full text-white font-mono"
             step="0.01"
           />
         </div>

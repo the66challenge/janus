@@ -7,13 +7,23 @@ export default {
   theme: {
     extend: {
       colors: {
+        // Racing Base Colors
+        'racing-black': '#0a0a0a',
+        'carbon-grey': '#1a1a1a',
+        'steel-grey': '#2d3436',
+        'white-flag': '#ffffff',
+        
         // F1 Brand Colors
         'f1-red': '#E10600',
         'f1-black': '#15151E',
         'f1-dark': '#0D0D14',
         'f1-gray': '#38383F',
         
-        // Team Colors
+        // Team Colors  
+        'mclaren-orange': '#FF8700',
+        'mclaren-dark': '#1E1E1E',
+        'ferrari-red': '#DC0000',
+        'ferrari-yellow': '#FFF200',
         'mclaren': {
           orange: '#FF8700',
           dark: '#1E1E1E',
@@ -52,11 +62,17 @@ export default {
       animation: {
         'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
         'slide-up': 'slideUp 0.3s ease-out',
+        'gradient': 'gradient 8s linear infinite',
       },
       keyframes: {
         slideUp: {
           '0%': { transform: 'translateY(20px)', opacity: '0' },
           '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        gradient: {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
         },
       },
     },
