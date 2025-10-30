@@ -1,6 +1,26 @@
 import { http, createConfig } from 'wagmi';
 import { injected } from 'wagmi/connectors';
 
+// Define Local Hardhat chain for development
+export const localhost = {
+    id: 1337,
+    name: 'Localhost',
+    nativeCurrency: {
+        name: 'Ether',
+        symbol: 'ETH',
+        decimals: 18,
+    },
+    rpcUrls: {
+        default: {
+            http: ['http://127.0.0.1:8545'],
+        },
+        public: {
+            http: ['http://127.0.0.1:8545'],
+        },
+    },
+    testnet: true,
+};
+
 // Define Neon EVM DevNet chain
 export const neonDevnet = {
     id: 245022926,
@@ -29,13 +49,13 @@ export const neonDevnet = {
     testnet: true,
 };
 
-// Create Wagmi config
+// Create Wagmi config - using localhost Hardhat as primary
 export const config = createConfig({
-    chains: [neonDevnet],
+    chains: [localhost],
     connectors: [
         injected({ target: 'metaMask' }),
     ],
     transports: {
-        [neonDevnet.id]: http('https://devnet.neonevm.org'),
+        [localhost.id]: http('http://127.0.0.1:8545'),
     },
 });

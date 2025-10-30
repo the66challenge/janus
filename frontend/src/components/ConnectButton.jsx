@@ -1,5 +1,5 @@
 import { useAccount, useConnect, useDisconnect, useChainId, useSwitchChain } from 'wagmi';
-import { neonDevnet } from '../config/wagmi';
+import { localhost, neonDevnet } from '../config/wagmi';
 
 export function ConnectButton() {
   const { address, isConnected } = useAccount();
@@ -8,18 +8,33 @@ export function ConnectButton() {
   const chainId = useChainId();
   const { switchChain } = useSwitchChain();
 
-  const isCorrectNetwork = chainId === neonDevnet.id;
+  const isCorrectNetwork = chainId === localhost.id || chainId === neonDevnet.id;
+  const networkName = chainId === localhost.id ? 'Localhost' : chainId === neonDevnet.id ? 'Neon DevNet' : 'Unknown';
 
   if (isConnected) {
     return (
       <div className="flex items-center gap-4">
         {!isCorrectNetwork && (
-          <button
-            onClick={() => switchChain({ chainId: neonDevnet.id })}
-            className="px-4 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 font-semibold"
-          >
-            Switch to Neon DevNet
-          </button>
+          <div className="flex gap-2">
+            <button
+              onClick={() => switchChain({ chainId: localhost.id })}
+              className="px-3 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 text-sm font-semibold"
+            >
+              Localhost
+            </button>
+            <button
+              onClick={() => switchChain({ chainId: neonDevnet.id })}
+              className="px-3 py-2 bg-yellow-600 text-white rounded-lg hover:bg-yellow-700 text-sm font-semibold"
+            >
+              Neon DevNet
+            </button>
+          </div>
+        )}
+        
+        {isCorrectNetwork && (
+          <div className="px-3 py-1 bg-green-800 text-green-200 rounded text-sm font-semibold">
+            {networkName}
+          </div>
         )}
         
         <div className="px-4 py-2 bg-gray-800 rounded-lg font-mono">
