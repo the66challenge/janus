@@ -1,22 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Titillium+Web:wght@200;300;400;600;700;900&family=Orbitron:wght@400;500;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    @apply bg-f1-black text-white min-h-screen;
+    @apply bg-black text-white min-h-screen;
     margin: 0;
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family: 'Titillium Web', 'Inter', system-ui, -apple-system, sans-serif;
+    overflow-x: hidden;
   }
 
   * {
     box-sizing: border-box;
   }
+
+  /* Custom CSS Variables for Interactive Effects */
+  :root {
+    --mouse-x: 50%;
+    --mouse-y: 50%;
+  }
+
+  /* Racing Background Animation */
+  @keyframes racingStripes {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  .racing-bg {
+    background: linear-gradient(135deg, #ff8700 0%, #dc143c 25%, #0a0a0a 50%, #dc143c 75%, #ff8700 100%);
+    background-size: 400% 400%;
+    animation: racingStripes 8s ease infinite;
+  }
 }
 
 @layer components {
   .btn-primary {
-    @apply px-4 py-2 bg-f1-red text-white rounded-lg hover:bg-red-700 transition-colors font-semibold;
+    @apply px-4 py-2 bg-orange-500 text-white rounded-lg hover:bg-orange-600 transition-colors font-semibold;
   }
 
   .btn-secondary {
@@ -25,6 +51,14 @@
 
   .card {
     @apply bg-gray-900 border border-gray-800 rounded-lg p-6 shadow-lg;
+  }
+
+  .input {
+    @apply px-3 py-2 bg-f1-black border border-f1-gray rounded text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-mclaren-orange focus:border-mclaren-orange transition-all duration-200;
+  }
+
+  .input:hover {
+    @apply border-mclaren-orange/50;
   }
 
   .alert-danger {

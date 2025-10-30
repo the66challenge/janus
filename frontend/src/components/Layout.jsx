@@ -1,71 +1,93 @@
 import { NavLink, Outlet } from 'react-router-dom';
 import { ConnectButton } from './ConnectButton';
+import { useMemo } from 'react';
 
 export function Layout() {
+  // Memoize background animations for better performance
+  const backgroundElements = useMemo(() => 
+    [...Array(20)].map((_, i) => (
+      <div
+        key={i}
+        className="absolute w-1 h-20 bg-gradient-to-b from-orange-500/40 to-transparent animate-pulse"
+        style={{
+          left: `${Math.random() * 100}%`,
+          top: `${Math.random() * 100}%`,
+          animationDelay: `${Math.random() * 5}s`,
+          animationDuration: `${2 + Math.random() * 3}s`
+        }}
+      />
+    )), []
+  );
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-f1-black via-f1-dark to-track text-white">
-      {/* Header */}
-      <header className="border-b border-f1-gray bg-f1-black/90 backdrop-blur-sm sticky top-0 z-50">
+    <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black text-white relative overflow-hidden">
+      {/* F1 Background Effects */}
+      <div className="fixed inset-0 opacity-30">
+        {backgroundElements}
+      </div>
+
+      {/* Header with Glass Morphism */}
+      <header className="backdrop-blur-xl bg-black/20 border-b border-white/10 sticky top-0 z-50 shadow-2xl">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             
-            {/* Logo */}
-            <NavLink to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+            {/* Logo with F1 Style */}
+            <NavLink to="/" className="flex items-center gap-3 hover:scale-105 transition-all duration-300 group">
               <div className="relative">
-                <span className="text-4xl">🏎️</span>
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-f1-red rounded-full animate-pulse-fast"></div>
+                <span className="text-4xl group-hover:animate-bounce">🏎️</span>
+                <div className="absolute -top-1 -right-1 w-3 h-3 bg-gradient-to-r from-orange-500 to-red-500 rounded-full animate-pulse"></div>
               </div>
               <div>
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-f1-red to-mclaren-orange bg-clip-text text-transparent">
-                  Janus Pit Wall
+                <h1 className="text-2xl font-black font-racing bg-gradient-to-r from-orange-500 via-red-500 to-orange-500 bg-clip-text text-transparent bg-[length:200%_100%] animate-gradient">
+                  JANUS
                 </h1>
-                <p className="text-xs text-gray-400 font-racing">
-                  MEV Defense • F1 Powered
+                <p className="text-xs text-gray-300 font-f1 tracking-wider">
+                  F1 × DeFi Racing Platform
                 </p>
               </div>
             </NavLink>
 
-            {/* Navigation */}
-            <nav className="hidden md:flex items-center gap-8">
+            {/* F1 Racing Navigation */}
+            <nav className="hidden md:flex items-center gap-6">
               <NavLink 
-                to="/" 
+                to="/app" 
                 className={({ isActive }) => 
-                  `font-f1 font-semibold transition-all duration-200 hover:text-f1-red ${
-                    isActive ? 'text-f1-red border-b-2 border-f1-red pb-1' : 'text-gray-300'
+                  `relative px-4 py-2 font-f1 font-bold transition-all duration-300 rounded-lg backdrop-blur-md border border-white/20 hover:border-orange-400/60 hover:scale-105 ${
+                    isActive ? 'bg-gradient-to-r from-orange-500/20 to-red-500/20 text-orange-400 border-orange-400/60 shadow-lg shadow-orange-500/25' : 'text-gray-300 hover:text-white hover:bg-white/5'
                   }`
                 }
               >
                 🏁 Dashboard
               </NavLink>
               <NavLink 
-                to="/swap" 
+                to="/app/swap" 
                 className={({ isActive }) => 
-                  `font-f1 font-semibold transition-all duration-200 hover:text-mclaren-orange ${
-                    isActive ? 'text-mclaren-orange border-b-2 border-mclaren-orange pb-1' : 'text-gray-300'
+                  `relative px-4 py-2 font-f1 font-bold transition-all duration-300 rounded-lg backdrop-blur-md border border-white/20 hover:border-orange-400/60 hover:scale-105 ${
+                    isActive ? 'bg-gradient-to-r from-orange-500/20 to-red-500/20 text-orange-400 border-orange-400/60 shadow-lg shadow-orange-500/25' : 'text-gray-300 hover:text-white hover:bg-white/5'
                   }`
                 }
               >
                 💱 Swap
               </NavLink>
               <NavLink 
-                to="/marketplace" 
+                to="/app/marketplace" 
                 className={({ isActive }) => 
-                  `font-f1 font-semibold transition-all duration-200 hover:text-ferrari-red ${
-                    isActive ? 'text-ferrari-red border-b-2 border-ferrari-red pb-1' : 'text-gray-300'
+                  `relative px-4 py-2 font-f1 font-bold transition-all duration-300 rounded-lg backdrop-blur-md border border-white/20 hover:border-red-500/60 hover:scale-105 ${
+                    isActive ? 'bg-gradient-to-r from-red-500/20 to-orange-500/20 text-red-400 border-red-400/60 shadow-lg shadow-red-500/25' : 'text-gray-300 hover:text-white hover:bg-white/5'
                   }`
                 }
               >
-                🖼️ Market
+                🏁 Marketplace
               </NavLink>
               <NavLink 
-                to="/security" 
+                to="/app/security" 
                 className={({ isActive }) => 
-                  `font-f1 font-semibold transition-all duration-200 hover:text-neon ${
-                    isActive ? 'text-neon border-b-2 border-neon pb-1' : 'text-gray-300'
+                  `relative px-4 py-2 font-f1 font-bold transition-all duration-300 rounded-lg backdrop-blur-md border border-white/20 hover:border-cyan-400/60 hover:scale-105 ${
+                    isActive ? 'bg-gradient-to-r from-cyan-500/20 to-blue-500/20 text-cyan-400 border-cyan-400/60 shadow-lg shadow-cyan-500/25' : 'text-gray-300 hover:text-white hover:bg-white/5'
                   }`
                 }
               >
-                🛡️ Security
+                🛡️ MEV Shield
               </NavLink>
             </nav>
 
@@ -111,8 +133,12 @@ export function Layout() {
         </div>
       </header>
 
-      {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-8">
+      {/* Main Content with F1 Styling */}
+      <main className="relative z-10 max-w-7xl mx-auto px-4 py-8">
+        {/* Racing stripes decoration */}
+        <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-orange-500 to-transparent opacity-30"></div>
+        <div className="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-red-500 to-transparent opacity-20"></div>
+        
         <Outlet />
       </main>
 
