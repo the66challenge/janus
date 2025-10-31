@@ -57,7 +57,7 @@ export function Layout() {
                   }`
                 }
               >
-                🏁 Dashboard
+                🏁 Pit Wall
               </NavLink>
               <NavLink 
                 to="/app/swap" 
