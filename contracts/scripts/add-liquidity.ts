@@ -8,7 +8,7 @@ async function main() {
     console.log("Using account:", deployer.address);
     console.log("Account balance:", ethers.formatEther(await ethers.provider.getBalance(deployer.address)), "ETH");
 
-    // Get contract addresses from deployment file
+    // Get contract addresses from latest deployment file
     const fs = require('fs');
     const path = require('path');
     const deploymentsPath = path.join(__dirname, '../deployments/latest.json');
