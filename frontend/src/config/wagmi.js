@@ -49,13 +49,14 @@ export const neonDevnet = {
     testnet: true,
 };
 
-// Create Wagmi config - using localhost Hardhat as primary
+// Create Wagmi config - supporting both localhost Hardhat and Neon DevNet
 export const config = createConfig({
-    chains: [localhost],
+    chains: [localhost, neonDevnet],
     connectors: [
         injected({ target: 'metaMask' }),
     ],
     transports: {
         [localhost.id]: http('http://127.0.0.1:8545'),
+        [neonDevnet.id]: http('https://devnet.neonevm.org'),
     },
 });
